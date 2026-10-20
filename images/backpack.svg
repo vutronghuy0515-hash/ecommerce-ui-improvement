@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#eef1fb"/>
+  <path d="M120 90 q30 -30 60 0 l5 20 q-35 -18 -70 0 z" fill="#374151"/>
+  <rect x="95" y="100" width="110" height="150" rx="26" fill="#3b4f8a"/>
+  <rect x="95" y="100" width="110" height="150" rx="26" fill="none" stroke="#1f2a4d" stroke-width="3"/>
+  <rect x="115" y="120" width="70" height="55" rx="10" fill="#5b74c7"/>
+  <rect x="120" y="185" width="60" height="18" rx="6" fill="#f2b705"/>
+  <path d="M105 110 q-18 20 -4 70" fill="none" stroke="#1f2a4d" stroke-width="10" stroke-linecap="round"/>
+  <path d="M195 110 q18 20 4 70" fill="none" stroke="#1f2a4d" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="150" cy="215" r="6" fill="#1f2a4d"/>
+  <text x="150" y="270" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1f2a4d" text-anchor="middle">Balo Chống Gù M-19</text>
+</svg>

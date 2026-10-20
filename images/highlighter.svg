@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#eefbea"/>
+  <g transform="rotate(-30 150 150)">
+    <rect x="70" y="128" width="140" height="44" rx="10" fill="#7cc142"/>
+    <rect x="70" y="128" width="140" height="14" rx="7" fill="#9ed76b"/>
+    <polygon points="210,128 244,150 210,172" fill="#4f8c23"/>
+    <rect x="46" y="134" width="30" height="32" rx="6" fill="#3e7a1d"/>
+  </g>
+  <text x="150" y="235" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#3e7a1d" text-anchor="middle">HL-03 Plus</text>
+  <text x="150" y="256" font-family="Arial, sans-serif" font-size="11" fill="#3e7a1d" text-anchor="middle">Dạ Quang Xanh Lá</text>
+</svg>
