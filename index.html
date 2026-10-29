@@ -8,25 +8,46 @@
 </head>
 <body>
 
-  <!-- ===== HEADER ===== -->
+  <!-- ===== HEADER: LOGO + Ô TÌM KIẾM (MINH HOẠ, KHÔNG XỬ LÝ DỮ LIỆU THẬT) ===== -->
   <header class="site-header">
     <div class="header-top">
-      <a href="#" class="logo"> Nhà sách Phương Nam <span>Văn Phòng Phẩm</span></a>
-      <nav class="main-nav" aria-label="Điều hướng chính">
-        <ul>
-          <li><a href="#" class="active">Trang chủ</a></li>
-          <li><a href="#">Sách</a></li>
-          <li><a href="#">Văn Phòng Phẩm</a></li>
-          <li><a href="#">Quà Tặng</a></li>
-          <li><a href="#">Liên Hệ</a></li>
-        </ul>
-      </nav>
+      <a href="#" class="logo" title="Về đầu trang">Góc <span>Văn Phòng Phẩm</span></a>
+      <div class="search-box" title="Ô tìm kiếm minh hoạ giao diện, chưa xử lý dữ liệu thực tế">
+        <input type="search" placeholder="Tìm kiếm sản phẩm... (minh hoạ)" aria-label="Tìm kiếm sản phẩm (minh hoạ giao diện)">
+        <button type="button" aria-label="Tìm kiếm (minh hoạ giao diện)">Tìm</button>
+      </div>
     </div>
-    <div class="header-banner">
+  </header>
+
+  <!-- ===== THANH ĐIỀU HƯỚNG CHÍNH (nền trắng, tách khỏi header xanh) ===== -->
+  <nav class="main-nav" aria-label="Điều hướng chính">
+    <ul>
+      <li><a href="#" class="active">Trang chủ</a></li>
+      <li><a href="#" title="Mục minh hoạ, chưa có trang tương ứng trong bài tập">Sách</a></li>
+      <li><a href="#danh-sach-san-pham">Văn Phòng Phẩm</a></li>
+      <li><a href="#" title="Mục minh hoạ, chưa có trang tương ứng trong bài tập">Quà Tặng</a></li>
+      <li><a href="#" title="Mục minh hoạ, chưa có trang tương ứng trong bài tập">Liên Hệ</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== BREADCRUMB ===== -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="breadcrumb-inner">
+      <a href="#">Trang chủ</a>
+      <span class="breadcrumb-sep">/</span>
+      <span>Danh mục</span>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-current" aria-current="page">Văn Phòng Phẩm</span>
+    </div>
+  </nav>
+
+  <!-- ===== BANNER GIỚI THIỆU DANH MỤC ===== -->
+  <section class="header-banner">
+    <div class="header-banner-inner">
       <h1>Danh Mục Văn Phòng Phẩm</h1>
       <p>Bộ sưu tập dụng cụ học tập &amp; làm việc</p>
     </div>
-  </header>
+  </section>
 
   <p class="notice-academic">
     Đây là trang thiết kế phục vụ Bài tập cá nhân Chương 1 - học phần Phát triển ứng dụng WEB/TMĐT (UEH).
@@ -41,6 +62,7 @@
     <aside class="sidebar" aria-label="Danh mục và bộ lọc sản phẩm">
 
       <h2 class="sidebar-title">Danh Mục Sản Phẩm</h2>
+      <p class="sidebar-hint">Nhấn vào từng nhóm để xem danh mục con (minh hoạ cấu trúc phân loại, chưa liên kết sang trang danh mục chi tiết).</p>
 
       <details class="category-group">
         <summary>Bút - Viết</summary>
@@ -130,7 +152,7 @@
     </aside>
 
     <!-- ===== DANH SÁCH SẢN PHẨM ===== -->
-    <section class="products" aria-label="Danh sách sản phẩm Văn Phòng Phẩm">
+    <section class="products" id="danh-sach-san-pham" aria-label="Danh sách sản phẩm Văn Phòng Phẩm">
 
       <div class="products-toolbar">
         <div>
@@ -138,7 +160,7 @@
           <p class="products-desc">Tổng hợp bút viết, tập vở, sổ giấy, dụng cụ học tập, họa cụ và cặp balo được chọn lọc, phù hợp cho học sinh - sinh viên và dân văn phòng.</p>
         </div>
         <label class="sort-box">
-          Sắp xếp theo
+          Sắp xếp theo <span class="hint-illustrative">(minh hoạ)</span>
           <select aria-label="Sắp xếp sản phẩm (minh hoạ giao diện)">
             <option>Mới nhất</option>
             <option>Giá tăng dần</option>

@@ -8,14 +8,19 @@
   --color-primary-dark: #15399e;
   --color-primary-light: #e8f0fe;
   --color-accent: #ff9800;
+  --color-accent-light: #fff3e0;
+  --color-sale-bg: #ffe5e5;
+  --color-sale-text: #c62828;
   --color-text: #1f2937;
   --color-text-light: #6b7280;
   --color-border: #e2e8f0;
   --color-bg: #f6f8fc;
   --color-white: #ffffff;
   --radius: 12px;
+  --radius-card: 8px;
   --shadow: 0 2px 10px rgba(29, 78, 216, 0.08);
-  --shadow-hover: 0 8px 24px rgba(29, 78, 216, 0.16);
+  --shadow-hover: 0 6px 18px rgba(29, 78, 216, 0.12);
+  --container-max: 1680px;
 }
 
 * {
@@ -50,40 +55,92 @@ img {
 a:focus-visible,
 summary:focus-visible,
 select:focus-visible,
-input:focus-visible {
+input:focus-visible,
+button:focus-visible {
   outline: 3px solid var(--color-accent);
   outline-offset: 2px;
 }
 
 /* ================= HEADER ================= */
 .site-header {
-  background: linear-gradient(135deg, var(--color-primary) 0%, #3b82f6 100%);
+  background: var(--color-primary);
   color: var(--color-white);
 }
 
 .header-top {
-  max-width: 1200px;
+  max-width: var(--container-max);
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 12px;
-  padding: 16px 24px;
+  gap: 16px;
+  padding: 16px 32px;
 }
 
 .logo {
   font-size: 1.4rem;
   font-weight: 700;
   color: var(--color-white);
+  flex-shrink: 0;
 }
 
 .logo span {
   color: #ffe08a;
 }
 
-.main-nav ul {
+/* Ô tìm kiếm minh hoạ giao diện (không có JS, không xử lý dữ liệu thật) */
+.search-box {
   display: flex;
+  flex: 1 1 220px;
+  max-width: 480px;
+  min-width: 0;
+}
+
+.search-box input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  border-radius: 8px 0 0 8px;
+  padding: 9px 14px;
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.search-box input:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: -3px;
+}
+
+.search-box button {
+  border: none;
+  border-radius: 0 8px 8px 0;
+  padding: 9px 16px;
+  background: var(--color-primary-dark);
+  color: var(--color-white);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.search-box button:hover {
+  background: #0f2a6b;
+}
+
+/* ================= THANH ĐIỀU HƯỚNG CHÍNH (nền trắng) ================= */
+.main-nav {
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.main-nav ul {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 32px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
   gap: 24px;
   flex-wrap: wrap;
 }
@@ -91,36 +148,78 @@ input:focus-visible {
 .main-nav a {
   font-weight: 500;
   padding: 6px 4px;
+  color: var(--color-text);
   border-bottom: 2px solid transparent;
-  transition: border-color 0.2s ease, opacity 0.2s ease;
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
 
 .main-nav a:hover,
 .main-nav a.active {
-  border-bottom-color: #ffe08a;
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
 }
 
-.header-banner {
-  max-width: 1200px;
+/* ================= BREADCRUMB ================= */
+.breadcrumb {
+  background: var(--color-primary-light);
+}
+
+.breadcrumb-inner {
+  max-width: var(--container-max);
   margin: 0 auto;
-  padding: 28px 24px 40px;
+  padding: 10px 32px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--color-text-light);
 }
 
-.header-banner h1 {
+.breadcrumb a {
+  color: var(--color-text-light);
+  transition: color 0.2s ease;
+}
+
+.breadcrumb a:hover {
+  color: var(--color-primary);
+}
+
+.breadcrumb-sep {
+  color: var(--color-border);
+}
+
+.breadcrumb-current {
+  color: var(--color-primary-dark);
+  font-weight: 600;
+}
+
+/* ================= BANNER GIỚI THIỆU DANH MỤC ================= */
+.header-banner {
+  background: var(--color-primary-light);
+}
+
+.header-banner-inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 32px 32px 40px;
+}
+
+.header-banner-inner h1 {
   margin: 0 0 8px;
-  font-size: 2rem;
+  font-size: 1.9rem;
+  color: var(--color-primary-dark);
 }
 
-.header-banner p {
+.header-banner-inner p {
   margin: 0;
   max-width: 640px;
-  color: #e5edff;
+  color: var(--color-text-light);
 }
 
 .notice-academic {
-  max-width: 1200px;
+  max-width: var(--container-max);
   margin: 14px auto;
-  padding: 10px 24px;
+  padding: 10px 32px;
   font-size: 0.82rem;
   color: var(--color-text-light);
   font-style: italic;
@@ -128,12 +227,12 @@ input:focus-visible {
 
 /* ================= LAYOUT CHÍNH ================= */
 .layout {
-  max-width: 1200px;
+  max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 24px 48px;
+  padding: 0 32px 56px;
   display: grid;
-  grid-template-columns: 270px 1fr;
-  gap: 28px;
+  grid-template-columns: 260px 1fr;
+  gap: 32px;
   align-items: start;
 }
 
@@ -151,6 +250,13 @@ input:focus-visible {
   font-size: 1.05rem;
   margin: 4px 0 12px;
   color: var(--color-primary-dark);
+}
+
+.sidebar-hint {
+  font-size: 0.78rem;
+  color: var(--color-text-light);
+  margin: -6px 2px 12px;
+  line-height: 1.4;
 }
 
 .filter-title {
@@ -198,6 +304,16 @@ input:focus-visible {
   transform: rotate(180deg);
 }
 
+/* Nhóm bộ lọc dùng tông cam nhấn (--color-accent) để phân biệt rõ với
+   nhóm danh mục ở trên (tông xanh dương), tránh người dùng nhầm hai loại nhóm */
+.filter-group summary::after {
+  color: var(--color-accent);
+}
+
+.filter-group summary:hover {
+  background-color: var(--color-accent-light);
+}
+
 .category-list {
   padding: 4px 4px 12px 14px;
 }
@@ -222,13 +338,26 @@ input:focus-visible {
 }
 
 .filter-list li {
-  padding: 5px 0;
   font-size: 0.9rem;
   color: var(--color-text-light);
 }
 
+.filter-list label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.filter-list li:hover label {
+  background-color: var(--color-accent-light);
+}
+
 .filter-list input {
   margin-right: 8px;
+  cursor: pointer;
 }
 
 .filter-note {
@@ -266,7 +395,13 @@ input:focus-visible {
   color: var(--color-text-light);
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 8px;
+}
+
+.hint-illustrative {
+  font-size: 0.78rem;
+  font-style: italic;
 }
 
 .sort-box select {
@@ -277,17 +412,18 @@ input:focus-visible {
   color: var(--color-text);
 }
 
-/* Lưới sản phẩm bằng CSS Grid */
+/* Lưới sản phẩm bằng CSS Grid - auto-fill/minmax tự co giãn số cột theo
+   không gian thực tế (4 cột màn hình rộng, giảm dần khi chật, không ép cứng) */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 20px;
 }
 
 .product-card {
   background: var(--color-white);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-card);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -302,7 +438,8 @@ input:focus-visible {
 .product-image {
   position: relative;
   aspect-ratio: 1 / 1;
-  background: var(--color-primary-light);
+  background: var(--color-white);
+  padding: 18px;
 }
 
 .product-image img {
@@ -315,8 +452,8 @@ input:focus-visible {
   position: absolute;
   top: 10px;
   left: 10px;
-  background: var(--color-accent);
-  color: var(--color-white);
+  background: var(--color-sale-bg);
+  color: var(--color-sale-text);
   font-size: 0.72rem;
   font-weight: 700;
   padding: 3px 8px;
@@ -412,11 +549,23 @@ input:focus-visible {
 }
 
 /* =========================================================
-   RESPONSIVE - MÁY TÍNH BẢNG (~768px)
+   RESPONSIVE - MÁY TÍNH BẢNG (~1024px trở xuống)
+   Sidebar chuyển lên trên, lưới sản phẩm giảm cỡ ô tối thiểu
+   để auto-fill tự nhiên ra 2-3 cột tuỳ chiều rộng thực tế.
    ========================================================= */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .layout {
     grid-template-columns: 1fr;
+    padding: 0 24px 40px;
+  }
+
+  .header-top,
+  .main-nav ul,
+  .breadcrumb-inner,
+  .header-banner-inner,
+  .notice-academic {
+    padding-left: 24px;
+    padding-right: 24px;
   }
 
   .sidebar {
@@ -424,29 +573,51 @@ input:focus-visible {
   }
 
   .product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   }
 }
 
 /* =========================================================
-   RESPONSIVE - ĐIỆN THOẠI (~480px trở xuống)
+   RESPONSIVE - ĐIỆN THOẠI (~640px trở xuống)
+   Ưu tiên 2 cột khi card vẫn đủ rộng để đọc; auto-fill tự
+   chuyển về 1 cột trên những màn hình rất hẹp.
    ========================================================= */
-@media (max-width: 560px) {
+@media (max-width: 640px) {
   .header-top {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .search-box {
+    flex-basis: 100%;
+    max-width: none;
   }
 
   .main-nav ul {
     gap: 14px;
   }
 
-  .header-banner h1 {
+  .breadcrumb-inner {
+    font-size: 0.78rem;
+  }
+
+  .header-banner-inner {
+    padding: 22px 16px 28px;
+  }
+
+  .header-banner-inner h1 {
     font-size: 1.5rem;
   }
 
+  .header-top,
+  .main-nav ul,
+  .breadcrumb-inner,
+  .notice-academic {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
   .layout {
-    padding: 0 14px 32px;
+    padding: 0 16px 32px;
     gap: 18px;
   }
 
@@ -460,7 +631,7 @@ input:focus-visible {
   }
 
   .product-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 12px;
   }
 
@@ -470,11 +641,5 @@ input:focus-visible {
 
   .price-sale {
     font-size: 1rem;
-  }
-}
-
-@media (max-width: 400px) {
-  .product-grid {
-    grid-template-columns: 1fr;
   }
 }

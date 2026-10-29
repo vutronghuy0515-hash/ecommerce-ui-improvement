@@ -92,3 +92,44 @@ Sau khi nhận kết quả phân tích từ AI, em đã đối chiếu với web
 - **Responsive và Chrome DevTools:** CSS quyết định cách bố cục thay đổi theo kích thước màn hình; Chrome DevTools giúp em mô phỏng và kiểm tra kết quả trên máy tính, điện thoại. Việc kiểm tra bằng DevTools khác với việc trực tiếp viết hoặc chỉnh sửa quy tắc `@media` trong CSS.
 
 Qua quá trình thực hiện, AI được sử dụng để hỗ trợ phân tích và tạo mã nguồn ban đầu; các nội dung khảo sát, đánh giá và điều chỉnh được kiểm tra lại trước khi đưa vào bài tập.
+
+## 7. Hoàn thiện và tinh chỉnh giao diện (Claude Code trong VS Code)
+
+Phần này ghi lại quá trình dùng Claude Code để rà soát và hoàn thiện tiếp bản dựng ban đầu (mục 1-6 ở trên), vẫn trong phạm vi Bài tập 1 — không phải một bài tập khác.
+
+### 7.1. Vấn đề phát hiện khi rà soát lại mã nguồn
+
+Sinh viên yêu cầu Claude Code đọc lại toàn bộ `index.html`, `css/style.css`, thư mục `images/`, `README.md`, `AI_USAGE.md` và kiểm tra `git status` trước khi sửa gì. AI phát hiện: tên thương hiệu trong logo ("Nhà sách Phương Nam") không khớp tên dự án ở nơi khác; nhóm Danh Mục và nhóm Bộ Lọc trong sidebar dùng chung màu nên khó phân biệt; nội dung trang bị giới hạn `max-width: 1200px`; header/banner gộp chung một khối gradient không có breadcrumb/ô tìm kiếm; 8 file SVG sản phẩm có nền pastel khác màu đóng cứng bên trong. AI cũng tra cứu nhanh 2 trang tham khảo công khai (Thiên Long, Tiki) để đối chiếu nguyên tắc phân cấp thông tin; trang Fahasa trả về lỗi truy cập (HTTP 403) nên AI không khảo sát được và đã báo rõ giới hạn thay vì giả vờ đã xem.
+
+### 7.2. Các yêu cầu đã gửi cho AI (tóm tắt, không chép nguyên văn)
+
+Quá trình diễn ra qua nhiều lượt trao đổi trong cùng một phiên làm việc:
+
+1. **Lượt sửa nhỏ:** yêu cầu sửa các điểm cụ thể đã phát hiện — đổi tên thương hiệu, phân biệt màu nhóm Bộ Lọc/Danh Mục, thêm hover cho checkbox, ghi rõ "(minh hoạ)" cạnh ô sắp xếp, đổi 1 liên kết menu thành điểm neo thật.
+2. **Lượt nâng cấp toàn diện:** yêu cầu AI đóng vai Senior Frontend Developer/UI-UX Designer, cải tiến (không thiết kế lại từ đầu) theo chuẩn giao diện danh mục thương mại điện tử chuyên nghiệp — mở rộng chiều rộng nội dung, tách header/nav/breadcrumb/banner, đổi màu nhãn giảm giá, đổi lưới sản phẩm sang 4 cột, xử lý nền pastel trong SVG — kèm yêu cầu không dùng JavaScript/thư viện, không tạo file mới, không tự commit/push.
+3. **Lượt tinh chỉnh thêm:** sau khi xem ảnh chụp giao diện, sinh viên phản hồi hình ảnh sản phẩm còn nhỏ/nhiều khoảng trắng và yêu cầu AI xử lý; AI tính toán và thu hẹp `viewBox` của cả 8 file SVG, đồng thời đổi banner sang bố cục 2 cột và tinh chỉnh thêm cỡ chữ/khoảng cách card.
+4. **Phản hồi và yêu cầu hoàn tác:** sinh viên xem kết quả của lượt 3 và đánh giá **giao diện xấu đi**, yêu cầu quay lại đúng bản của lượt 2. AI đã hoàn tác toàn bộ thay đổi của lượt 3 (khôi phục `viewBox` gốc `0 0 300 300` của cả 8 SVG, bỏ bố cục banner 2 cột, trả lại cỡ chữ/khoảng cách card như lượt 2).
+5. **Lượt hiện tại:** sinh viên xác nhận chỉ đang hoàn thiện Bài tập 1 (chưa sang bài tập mới), yêu cầu rà soát và viết lại `README.md`/`AI_USAGE.md` cho đúng phạm vi, không đổi thêm giao diện.
+
+Nội dung đầy đủ của từng yêu cầu nằm trong lịch sử trò chuyện Claude Code của phiên làm việc; đoạn tóm tắt trên phản ánh đúng các yêu cầu cốt lõi, không phải trích dẫn nguyên văn.
+
+### 7.3. Kết quả thực tế hiện có trong mã nguồn (sau khi đã hoàn tác lượt 3)
+
+- Header tách thành 4 phần: header xanh (logo + ô tìm kiếm minh hoạ), thanh điều hướng nền trắng, breadcrumb, banner giới thiệu danh mục.
+- Biến `--container-max: 1680px` thay cho `max-width: 1200px` cũ, áp dụng cho toàn bộ container.
+- Sidebar: nhóm Bộ Lọc dùng tông cam (`--color-accent`), nhóm Danh Mục dùng tông xanh dương; hover/con trỏ rõ ràng cho checkbox/radio.
+- Lưới sản phẩm 4 cột ở desktop (`minmax(260px, 1fr)`), tự co giãn ở tablet/mobile.
+- Product card: nền ảnh trắng, nhãn giảm giá đỏ nhạt/đỏ đậm, bo góc riêng `--radius-card: 8px`.
+- Cả 8 file SVG: đã xoá dòng `<rect>` nền pastel, **vẫn giữ `viewBox="0 0 300 300"` gốc** (phần thu hẹp `viewBox` ở lượt 3 đã bị hoàn tác, không còn trong code hiện tại).
+
+### 7.4. Phần sinh viên thực hiện
+
+- Đọc các phân tích/đề xuất của AI và quyết định cho phép áp dụng vào mã nguồn ở từng lượt.
+- Xem giao diện qua ảnh chụp màn hình thực tế gửi trong phiên làm việc; trực tiếp đánh giá kết quả lượt 3 là "xấu đi" và yêu cầu AI hoàn tác.
+- Xác nhận chấp nhận giao diện ở trạng thái sau lượt 2 (trạng thái hiện tại).
+- Quyết định phạm vi và nội dung cần cập nhật trong `README.md`/`AI_USAGE.md`; chưa commit/push lên GitHub.
+
+**Lưu ý trung thực:**
+- Sinh viên không tự viết code ở các lượt này — toàn bộ thao tác sửa `index.html`, `css/style.css` và `viewBox` của các file SVG đều do AI thực hiện theo yêu cầu.
+- AI không có công cụ trình duyệt để tự chụp ảnh hoặc kiểm thử trực quan; AI chỉ kiểm tra cấu trúc mã nguồn (số lượng sản phẩm, ảnh, số cặp thẻ `<details>/<summary>` cân bằng, cấu trúc `<svg>` hợp lệ) bằng dòng lệnh sau mỗi lần sửa.
+- Việc kiểm tra riêng ở từng kích thước màn hình cụ thể (1366px/768px/390px) bằng Chrome DevTools **chưa được xác nhận** trong phiên làm việc này; sinh viên mới xác nhận đã xem giao diện desktop qua ảnh chụp thực tế.
