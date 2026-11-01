@@ -77,7 +77,7 @@ Các phần **có hoạt động thật**, chỉ bằng HTML/CSS, không cần J
 
 8 sản phẩm mẫu (tên, giá, mô tả), bảng màu chủ đạo xanh dương – trắng, font hệ thống (Segoe UI), footer, và cơ chế `<details>`/`<summary>` cho toàn bộ sidebar và nút "Xem chi tiết".
 
-### 6.5. Kiểm tra sau khi sửa
+### 6.5. Kiểm tra sau khi sửa (giai đoạn Buổi 1)
 
 Đã kiểm tra bằng dòng lệnh sau mỗi lần sửa: còn đủ 8 sản phẩm, 8 ảnh, 16 cặp thẻ `<details>/<summary>` cân bằng, 8 file SVG còn hợp lệ. Giao diện desktop đã được xem trực tiếp qua ảnh chụp màn hình thực tế trong quá trình làm việc và được xác nhận chấp nhận. Việc kiểm tra riêng ở kích thước tablet (768px)/mobile (390px) bằng Chrome DevTools **chưa được xác nhận cụ thể** tại thời điểm viết tài liệu này — cần tự kiểm tra trước khi coi là hoàn tất.
 
@@ -88,3 +88,72 @@ Các phần **có hoạt động thật**, chỉ bằng HTML/CSS, không cần J
 - **Phần em thực hiện:** Đối chiếu kết quả AI với ảnh khảo sát thực tế, kiểm tra trang web trên Chrome bằng **Chrome DevTools**, tự chỉnh sửa kiểu chữ, văn bản và bố cục; tìm hiểu vai trò của HTML `<details>`/`<summary>` và CSS trong thiết kế.
 
 Các prompt chính, kết quả AI và quá trình kiểm tra/điều chỉnh cần được ghi riêng trong file **`AI_USAGE.md`** theo yêu cầu bài tập.
+
+---
+
+## 8. Bài tập cá nhân Buổi 2 – Thực hành tiếp trên website Buổi 1
+
+### 8.1. Mục tiêu và phạm vi
+
+Buổi 2 **không tạo website mới**. Tiếp tục cải thiện khu vực **danh sách tám sản phẩm Văn Phòng Phẩm** (`section.products`), gồm thẻ sản phẩm, hình ảnh, tên/giá/nút **Xem chi tiết** và thanh **Sắp xếp theo**. Ba vấn đề ban đầu: ảnh tương đối nhỏ so với vùng chứa; tên/giá/nút nhỏ; thanh sắp xếp chưa nổi bật, khoảng cách chưa cân đối.
+
+### 8.2. Các bước và thay đổi thực hiện
+
+| Bước | Nội dung | Kết quả theo báo cáo Buổi 2 |
+|---|---|---|
+| 1. Rà soát | Chạy giao diện Buổi 1, chọn khu vực sản phẩm và ghi ba vấn đề | Xác định phạm vi cần cải thiện, có ảnh trước chỉnh sửa trong báo cáo |
+| 2. HTML5 semantic | Rà soát `header`, `nav`, `main`, `section`, `article`, ảnh và tiêu đề | Đổi thanh công cụ trong `section.products` thành `<header class="products-toolbar">`; dùng `aria-labelledby="tieu-de-san-pham"` kết nối với `<h2 id="tieu-de-san-pham">` |
+| 3. Liên kết CSS | Kiểm tra file CSS đã có và thẻ `link` trong `index.html` | Giữ `<link rel="stylesheet" href="css/style.css">`; không tạo lại CSS |
+| 4. Selector/Box Model | Cải thiện vùng ảnh, thông tin sản phẩm và nút | `.product-image` padding 18→14px; `.product-info` padding 14px 14px 16px→16px 14px 18px; `.product-name` 0.95→1rem; `.price-sale` 1.1→1.15rem; nút 0.88→0.9rem và padding 9px 12px→10px 14px |
+| 5. Flexbox | Chỉnh nhóm tiêu đề/mô tả và ô sắp xếp | `.products-toolbar`: `justify-content: space-between`, `align-items: center`, `gap: 20px`; `.sort-box` thêm nền, viền, bo góc và padding; phương án `flex-start` được thử nhưng không giữ |
+| 6. CSS Grid | Thử `2` cột, `3` cột và `gap: 16px`/`24px` bằng Chrome DevTools | **Không lưu cấu hình thử nghiệm**; giữ Grid tự động `repeat(auto-fill, minmax(260px, 1fr))`, `gap: 20px` ở quy tắc cơ bản; các media query tiếp tục xử lý màn hình nhỏ |
+| 7. Hover/Focus | Cải thiện phản hồi tương tác của card, ảnh và nút | Bổ sung viền hover, phóng nhẹ hình, bóng đổ và transition; giữ nguyên quy tắc `summary:focus-visible` đã có; bổ sung `prefers-reduced-motion` |
+| 8. Thay đổi độc lập | Kiểm tra vùng ảnh khi xem ở 390px | **Tự** thêm CSS giảm `.product-image` padding **14px→5px** tại ≤390px; **giữ nguyên 2 cột**, không đổi Grid thành một cột; Claude chỉ hỗ trợ kiểm tra mã nguồn |
+
+Đoạn CSS thay đổi độc lập ở **Bước 8**:
+
+```css
+@media (max-width: 390px) {
+  .product-image {
+    padding: 5px;
+  }
+}
+```
+
+Quy tắc này chỉ thay đổi phần đệm bên trong khung ảnh trên điện thoại nhỏ; không thay đổi số cột của `.product-grid`. Ảnh sản phẩm vẫn sử dụng `object-fit: contain` để giữ tỷ lệ.
+
+### 8.3. Kiểm tra và kết quả
+
+- **Đã thực hiện:** dùng Chrome DevTools thử bố cục 2/3 cột, thay `gap` 16/24px ở Bước 6 và so sánh giao diện; thử `flex-start` ở Bước 5 rồi không giữ vì bố cục chưa cân đối; xem vấn đề ảnh nhỏ ở màn hình 390px ở Bước 8.
+- **AI đã kiểm tra trên mã nguồn:** quy tắc `padding: 5px` ở ≤390px hợp cú pháp và không thay đổi Grid hai cột. Đây là kết luận phân tích CSS, không thay cho kiểm tra trực quan sau sửa.
+- **Cần xác nhận thủ công trước khi nộp:** hình ảnh sau sửa có thực sự phù hợp, không méo/cắt; thao tác chuột/Tab để xác minh Hover/Focus; liên kết và nút **Xem chi tiết**; bố cục không tràn tại 1366px, 768px và 390px. Báo cáo Buổi 2 có bảng kiểm thử, các mục chưa thử cần giữ trạng thái **Chưa xác minh**.
+
+### 8.4. Công cụ AI và vai trò của sinh viên
+
+- **ChatGPT:** hỗ trợ phân tích đề bài, giải thích HTML5/CSS3, soạn/rà soát prompt và cách trình bày báo cáo.
+- **Claude Code trong VS Code:** hỗ trợ rà soát/chỉnh mã HTML/CSS theo yêu cầu ở các bước phù hợp; ở Bước 8 **chỉ kiểm tra**, không sửa thay.
+- **Sinh viên:** chọn vấn đề từ giao diện, thực hành trong Chrome DevTools, so sánh các phương án (đặc biệt ở Bước 5–6) và **tự sửa `padding` ở Bước 8**.
+
+Chi tiết prompt, kết quả và phần tự điều chỉnh được ghi trong **[`AI_USAGE.md`](AI_USAGE.md)**. Bảy câu hỏi kiến thức ở Mục 9 và ảnh minh chứng được trình bày trong **báo cáo cá nhân Buổi 2**.
+
+### 8.5. GitHub và hướng dẫn kiểm tra sau khi cập nhật
+
+- **Repository:** https://github.com/vutronghuy0515-hash/ecommerce-ui-improvement
+- **GitHub Pages:** https://vutronghuy0515-hash.github.io/ecommerce-ui-improvement/
+
+Các đường dẫn trên là repository và website đã sử dụng từ Buổi 1; **bản Buổi 2 chỉ được coi là đã cập nhật trực tuyến sau khi commit/push và kiểm tra thực tế**.
+
+Giữ cấu trúc file:
+
+```text
+ecommerce-ui-improvement/
+├── index.html
+├── css/
+│   └── style.css
+├── images/
+│   └── (8 file SVG được index.html sử dụng)
+├── README.md
+└── AI_USAGE.md
+```
+
+Mở `index.html` bằng Chrome hoặc Live Server, kiểm tra các đường dẫn ảnh tương đối `images/...`, việc áp dụng `css/style.css`, thử nút Xem chi tiết và kiểm tra bằng DevTools. Các chức năng tìm kiếm, lọc, sắp xếp vẫn **chỉ minh họa giao diện**, chưa xử lý dữ liệu thật; xử lý JavaScript là nội dung cho Buổi 3.
